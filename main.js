@@ -7,10 +7,11 @@ const memeImage = document.querySelector(".meme-generator img");
 const memeTitle = document.querySelector(".meme-generator .meme-title");
 const prevMemeBtn = document.querySelector(".prev-meme-btn");
 const nextMemeBtn = document.querySelector(".next-meme-btn");
+const shareMemeBtn = document.querySelector(".share-meme-btn");
 
 const updateDetails = (url, title) => {
     memeImage.src = url;
-    memeImage.alt = "Meme: " + title;
+    memeImage.alt = title;
     memeTitle.innerHTML = title;
 };
 
@@ -31,7 +32,7 @@ const generateMeme = () => {
                 generateMeme();  // Recursively fetch another meme
                 return;
             }
-            seenMemes.add(data.url);  // Add the new meme URL to the set of seen memes
+            seenMemes.add(data.url);
             updateDetails(data.url, data.title);
             addMemeToHistory(data.url, data.title);
         })
@@ -56,6 +57,21 @@ const goToNextMeme = () => {
         updateDetails(meme.url, meme.title);
     }
 };
+
+shareMemeBtn.addEventListener("click", () => {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Check out this meme!',
+            text: memeTitle.innerHTML + " - Check out this meme!",
+            url: memeImage.src
+        }).then(() => {
+            console.log('Thanks for sharing!');
+        })
+        .catch(console.error);
+    } else {
+        alert("Web Share API is not supported in this browser.");
+    }
+});
 
 generateMemeBtn.addEventListener("click", generateMeme);
 prevMemeBtn.addEventListener("click", goToPreviousMeme);
