@@ -5,22 +5,20 @@ let seenMemes = new Set();  // Set to track seen meme URLs
 const generateMemeBtn = document.querySelector(".meme-generator .generate-meme-btn");
 const memeImage = document.querySelector(".meme-generator img");
 const memeTitle = document.querySelector(".meme-generator .meme-title");
-const memeAuthor = document.querySelector(".meme-generator .meme-author");
 const prevMemeBtn = document.querySelector(".prev-meme-btn");
 const nextMemeBtn = document.querySelector(".next-meme-btn");
 
-const updateDetails = (url, title, author) => {
+const updateDetails = (url, title) => {
     memeImage.src = url;
     memeImage.alt = "Meme: " + title;
     memeTitle.innerHTML = title;
-    memeAuthor.innerHTML = `Meme by: ${author}`;
 };
 
-const addMemeToHistory = (url, title, author) => {
+const addMemeToHistory = (url, title) => {
     if (currentMemeIndex !== memeHistory.length - 1) {
         memeHistory = memeHistory.slice(0, currentMemeIndex + 1);
     }
-    memeHistory.push({ url, title, author });
+    memeHistory.push({ url, title });
     currentMemeIndex = memeHistory.length - 1;
 };
 
@@ -34,8 +32,8 @@ const generateMeme = () => {
                 return;
             }
             seenMemes.add(data.url);  // Add the new meme URL to the set of seen memes
-            updateDetails(data.url, data.title, data.author);
-            addMemeToHistory(data.url, data.title, data.author);
+            updateDetails(data.url, data.title);
+            addMemeToHistory(data.url, data.title);
         })
         .catch(error => {
             console.error('Error fetching meme:', error);
@@ -47,7 +45,7 @@ const goToPreviousMeme = () => {
     if (currentMemeIndex > 0) {
         currentMemeIndex--;
         const meme = memeHistory[currentMemeIndex];
-        updateDetails(meme.url, meme.title, meme.author);
+        updateDetails(meme.url, meme.title);
     }
 };
 
@@ -55,7 +53,7 @@ const goToNextMeme = () => {
     if (currentMemeIndex < memeHistory.length - 1) {
         currentMemeIndex++;
         const meme = memeHistory[currentMemeIndex];
-        updateDetails(meme.url, meme.title, meme.author);
+        updateDetails(meme.url, meme.title);
     }
 };
 
