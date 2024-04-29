@@ -1,0 +1,71 @@
+body {
+  background-color: #f4f4f9; /* Light grey background */
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+.meme-generator {
+  background-color: #fff; /* White background for the meme generator */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin: auto;
+  max-width: 400px;
+  text-align: center;
+}
+
+.meme-generator img {
+  max-height: 300px;  /* Limit the height */
+  max-width: 100%;    /* Limit the width to not exceed the container width */
+  width: auto;        /* Maintain aspect ratio */
+  height: auto;       /* Maintain aspect ratio */
+  object-fit: contain; /* Ensures the image is scaled correctly within bounds */
+  border-radius: 4px;
+}
+
+
+.generate-meme-btn, .share-meme-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  margin: 10px 0;
+  font-size: 18px;
+  color: #fff;
+  background: #007bff; /* Bootstrap primary color for consistency */
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+.generate-meme-btn:hover, .share-meme-btn:hover {
+  background-color: #0056b3; /* Darken the button on hover */
+}
+
+.share-meme-btn img {
+  vertical-align: middle;
+  height: 20px;
+  margin-right: 8px;
+}
+.share-meme-btn i, .generate-meme-btn i {
+  margin-right: 5px;
+  color: #fff; /* White color for icons */
+  font-size: 16px; /* Adjust size as needed */
+}
+
+
+.prev-meme-btn, .next-meme-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  margin: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  background: #007bff; /* Consistent with other buttons */
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+.prev-meme-btn:hover, .next-meme-btn:hover {
+  background-color: #0056b3;
+}
+
